@@ -1,0 +1,185 @@
+{% extends "layout.html" %}
+
+{% block title %}
+ Index
+{% endblock %}
+
+{% block style %}
+<style>
+    div > .btn-primary{
+        width:80%;
+    }
+    .btn-primary{
+        margin:5px;
+        background-color:rgba(105,67,0,.9);
+        border-color:rgba(105,67,0,.9);
+        color:#ffcd88;
+        margin-right:10px;
+    }
+    .btn-primary:hover{
+         background-color:#694300;
+         opacity:0.5;
+         border-color:rgba(105,67,0,.9);
+    }
+    h1,h4{
+        text-align:left;
+        color:rgba(105,67,0,.9);
+    }
+    h2{
+        text-align:left;
+        color:rgba(105,67,0,.9);
+        margin-left:10px;
+        text-size=90vw;
+    }
+     main{
+
+         height:90vh;
+         display:flex;
+         justify-content:center;
+     }
+
+
+
+     #right_div {
+        height:fit-content;
+         display:flex;
+         width:75%;
+         flex-direction: column;
+         justify-content:space-around;
+         align-content:flex-start;
+         margin-right:10px;
+
+
+     }
+     #left_div {
+         height:100%;
+         display:flex;
+         flex-direction: column;
+         width:25%;
+         align-content:flex-start;
+         align-self:center;
+         justify-content:space-around;
+         border-right-color:rgba(105,67,0,.9);
+         border-right-style:inset;
+         margin-right:10px;
+     }
+     li{
+         text-align:left;
+     }
+
+</style>
+{% endblock %}
+
+{% block main %}
+<div id = "left_div">
+    <form action="/" >
+        <h2>Insert</h2>
+        <div>
+            <button class="btn btn-primary" name="insert_note">Note</button>
+            <button class="btn btn-primary" name="insert_pics">Picture</button>
+            <button class="btn btn-primary" name="insert_vids">Video</button>
+        </div>
+    </form>
+    <form action="/" method="post">
+        <h2>View</h2>
+        <div>
+            <button class="btn btn-primary" name="view_note">Notes</button>
+            <button class="btn btn-primary" name="view_pics">Pictures</button>
+            <button class="btn btn-primary" name="view_vids">Videos</button>
+        </div>
+    </form>
+
+</div>
+
+
+<div id="right_div">
+    <script>
+        function remove(event){
+            var x = event.srcElement.getAttribute("id");
+            document.querySelector("input").value = x;
+        }
+        function max_no_alert(event){
+        if (event.srcElement.value.length >= 4294967295){
+            alert("max number of characters is 4,294,967,295");
+        }
+    }
+    </script>
+    {% if msg == "mainPage" %}
+    <div id="mainPage" style="align-items: flex-start">
+        <h1> <b>Welcome {{name}} !</b></h1>
+        <h4>Current Number of Notes = {{notes_counter}}</h4>
+        <h4>Current Number of pictures = {{pics_counter}}</h4>
+        <h4>Current Number of videos = {{vids_counter}}</h4>
+    </div>
+    {% endif %}
+ {% if msg == "view_note" %}
+    <form style="height:fit-content" action="/edit" method="post">
+        <input type="hidden" name="selected">
+        {% for note in notes %}
+    <div class="form-group">
+        <textarea name="{{note.id}}"class="form-control" maxlength="4294967295" rows="5" cols="100" disabled>{{note.text}}</textarea>
+    </div>
+    <!--<button type="submit" class="btn btn-primary">EDIT</button>-->
+    <button id="{{note.id}}"type="submit" class="btn btn-primary" onclick="remove(event)">DELETE</button>
+    {% endfor %}
+    </form>
+
+ {% endif %}
+ {% if msg == "insert_pics" %}
+ <form action="/" method="post">
+    <div class="form-group">
+    <textarea  maxlength="4294967295" name="picture" class="form-control" rows="10" cols="100" placeholder="Enter the link of the picture" autofocus onkeypress="max_no_alert(event)" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+ </form>
+ {% endif %}
+ {% if msg == "view_pics" %}
+    <form style="height:fit-content" action="/remove_pic" method="post">
+        <input type="hidden" name="selected">
+        {% for pic in pics %}
+    <div class="form-group">
+    <img src="{{pic.link}}">
+    </div>
+    <button id="{{pic.id}}"type="submit" class="btn btn-primary" onclick="remove(event)">DELETE</button>
+    {% endfor %}
+    </form>
+ {% endif %}
+
+ {% if msg == "insert_vid" %}
+<form action="/" method="post">
+    <div class="form-group">
+        <textarea  maxlength="4294967295" name="vid" class="form-control" rows="10" cols="100" placeholder="Type your Youtube link in here" autofocus onkeypress="max_no_alert(event)" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+ {% endif %}
+
+ {% if msg == "view_vids" %}
+ <form style="height:fit-content" action="/remove_vids" method="post">
+        <input type="hidden" name="selected">
+        {% for vid in vids %}
+    <div class="form-group">
+    <iframe width="560" height="315" src="{{vid.link}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <button id="{{vid.id}}"type="submit" class="btn btn-primary" onclick="remove(event)">DELETE</button>
+    {% endfor %}
+    </form>
+
+ {% endif %}
+
+
+
+
+ {% if msg == "insert_note" %}
+ <!--alert when the max. no. of input exceeded-->
+<form action="/" method="post">
+    <div class="form-group">
+        <textarea  maxlength="4294967295" name="note" class="form-control" rows="10" cols="100" placeholder="Type your Note in here" autofocus onkeypress="max_no_alert(event)" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endif %}
+</div>
+
+
+{% endblock %}
