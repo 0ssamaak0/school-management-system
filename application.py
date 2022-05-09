@@ -211,7 +211,6 @@ def login():
         if Type == "":
             return apology("Please Select The Type")
 
-
         # Query database for username
         ''' اسم الداتا بيز الي انت حاطه غبي YA'''
         if Type == 'student':
