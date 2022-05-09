@@ -20,6 +20,14 @@
             <label for="password">Password:</label>
             <input class="form-control" name="password" placeholder="Password" type="password">
         </div>
+        <div class="form-group">
+            <label for="type">Account Type :</label>
+            <select id="type" name="type">
+                <option value="">-- select one --</option>
+                <option value="student">Student</option>
+                <option value="staff">Staff Member</option>
+            </select>
+        </div>
         <button class="btn btn-primary" type="submit">Log In</button>
     </form>
 {% endblock %}
