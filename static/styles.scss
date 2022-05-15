@@ -1,0 +1,224 @@
+// Color Variables
+:root {
+    @media(prefers-color-scheme: light) {
+        // Background
+        --background-color: #EFEFEF;
+        // Foreground
+        --foreground-color: #D1D1D1;
+
+        // Button
+        --button-color: #626c8e;
+        --button-color2: #628e7d;
+
+        // Text
+        --text-on-bg: #000000;
+        --text-on-fg: #000000;
+        --text-on-button: #ffffff;
+    }
+
+    @media(prefers-color-scheme: dark) {
+        // Background
+        --background-color: #121418;
+        // Foreground
+        --foreground-color: #23262e;
+
+        // Button
+        --button-color: #042ac3;
+        --button-color2: #00c39a;
+
+        // Text
+        --text-on-bg: #ffffff;
+        --text-on-fg: #ffffff;
+        --text-on-button: #ffffff;
+        --text-on-button2: #000000;
+    }
+}
+
+* {
+    transition: 0.3s ease-in-out !important;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--background-color);
+    color: var(--text-on-bg);
+    min-height: 110vh;
+}
+
+// Navbar
+.navbar-toggler {
+    span {
+        color: var(--text-on-button) !important;
+    }
+
+    background-color: var(--button-color);
+    padding: 10px;
+    border-radius: 5px;
+    border: none !important;
+}
+
+ul.navbar-ul {
+    list-style: none;
+}
+
+li.navbar-item {
+    text-decoration: none;
+    background: var(--button-color);
+
+
+
+    margin: 10px;
+    padding: 5px 15px;
+    border-radius: 30px;
+    color: var(--text-on-button) !important;
+
+    &:hover {
+        filter: brightness((1.2));
+    }
+
+    a {
+        color: var(--text-on-button) !important;
+        text-decoration: none;
+        font-weight: 600;
+
+
+        &:hover {
+            color: var(--text-on-bg);
+            text-decoration: none;
+        }
+    }
+
+    &.green {
+        background: var(--button-color2);
+
+        a {
+            color: var(--text-on-button2) !important;
+        }
+    }
+}
+
+
+button {
+    margin: 15px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    background: var(--button-color);
+
+    &.green {
+        background-color: var(--button-color2);
+    }
+
+    outline: none;
+    border: none;
+    color: var(--text-on-button);
+
+    &.tbutton {
+        color: var(--text-on-button);
+
+        &:hover {
+            filter: brightness(1.1);
+        }
+    }
+
+    &:hover {
+        filter: brightness(1.1);
+
+    }
+
+    a {
+        color: var(--text-on-button);
+
+        text-decoration: none;
+
+        &:hover {
+            color: var(--text-on-button);
+            text-decoration: none;
+        }
+
+        &:visited {
+            color: var(--text-on-button);
+            text-decoration: none;
+        }
+    }
+}
+
+// inputs 
+textarea {
+    margin: 15px;
+    // background-color: var(--textarea-color) !important;
+
+    &::placeholder {
+        color: var(--text-on-fg) !important;
+    }
+}
+
+
+div.container {
+    margin-top: 25px;
+    padding: 15px;
+
+}
+
+div.log {
+    max-width: 50%;
+    color: var(--text-on-fg);
+    background-color: var(--foreground-color);
+    border-radius: 25px;
+    font-weight: 600;
+}
+
+div.form-group {
+    margin: 15px;
+
+    label {
+        margin: 10px 0;
+    }
+
+    input {
+        padding: 20px;
+        border-radius: 10px;
+        border: 2px double var(--button-color2);
+
+        &:focus {
+            filter: brightness(0.95);
+            outline: none 0 !important;
+            box-shadow: none !important;
+            border: 2px double var(--button-color2) !important;
+
+        }
+    }
+
+    select {
+        border-radius: 10px;
+        padding: 5px 15px;
+        border: 2px double var(--button-color2);
+
+        &:focus {
+            border: 2px double var(--button-color2);
+
+        }
+
+    }
+}
+
+// table
+table {
+
+    th,
+    td {
+        color: var(--text-on-bg);
+        font-size: 1.1em;
+
+
+    }
+}
+
+
+
+
+
+// Apology 
+h1.apology {
+    color: var(--text-on-fg);
+    text-align: center;
+}

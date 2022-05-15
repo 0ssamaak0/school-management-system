@@ -1,143 +1,132 @@
 {% extends "layout.html" %}
 
 {% block title %}
- Index
+Index
 {% endblock %}
 
 {% block style %}
 <style>
-    div > .btn-primary{
-        width:80%;
+    div.btn-primary {
+        width: 80%;
     }
-    .btn-primary{
-        margin:5px;
-        background-color:rgba(105,67,0,.9);
-        border-color:rgba(105,67,0,.9);
-        color:#ffcd88;
-        margin-right:10px;
+
+    .btn-primary {
+        margin: 5px;
+        margin-right: 10px;
     }
-    .btn-primary:hover{
-         background-color:#694300;
-         opacity:0.5;
-         border-color:rgba(105,67,0,.9);
+
+    h2 {
+        text-align: left;
+        margin-left: 10px;
     }
-    h1,h4{
-        text-align:left;
-        color:rgba(105,67,0,.9);
+
+    main {
+
+        height: 90vh;
+        display: flex;
+        justify-content: center;
     }
-    h2{
-        text-align:left;
-        color:rgba(105,67,0,.9);
-        margin-left:10px;
-        text-size=90vw;
+
+
+
+    #right_div {
+        height: fit-content;
+        display: flex;
+        width: 75%;
+        flex-direction: column;
+        justify-content: space-around;
+        align-content: flex-start;
+        margin-right: 10px;
+
+
     }
-     main{
 
-         height:90vh;
-         display:flex;
-         justify-content:center;
-     }
+    #left_div {
+        height: 100%;
+        display: flex;
+        width: 25%;
+        justify-content: space-around;
+        border-right-style: inset;
+        margin-right: 10px;
+    }
 
-
-
-     #right_div {
-        height:fit-content;
-         display:flex;
-         width:75%;
-         flex-direction: column;
-         justify-content:space-around;
-         align-content:flex-start;
-         margin-right:10px;
-
-
-     }
-     #left_div {
-         height:100%;
-         display:flex;
-         flex-direction: column;
-         width:25%;
-         align-content:flex-start;
-         align-self:center;
-         justify-content:space-around;
-         border-right-color:rgba(105,67,0,.9);
-         border-right-style:inset;
-         margin-right:10px;
-     }
-     li{
-         text-align:left;
-     }
-
+    li {
+        text-align: left;
+    }
 </style>
 {% endblock %}
 
 {% block main %}
-<div id = "left_div">
-
-{% if msg == "home_staff" %}
-    <form action="/homeStaff" method="post" >
-        <h2>Dash Board</h2>
+<div id="left_div">
+    {% if msg == "home_staff" %}
+    <form action="/homeStaff" method="post">
+        <h2>Dashboard</h2>
         <div>
-            <button class="btn btn-primary" name="add_course">Add Course</button>
-            <button class="btn btn-primary" name="add_assignment">Add Assignment</button>
+            <button class="" name="add_course">Add Course</button>
+            <button class="" name="add_assignment">Add Assignment</button>
         </div>
     </form>
-{% endif %}
+    {% endif %}
 
-{% if msg == "home_student" %}
+    {% if msg == "home_student" %}
     <form action="/homeStudent" method="post">
-        <h2>Dash Board</h2>
+        <h2>Dashboard</h2>
         <div>
-            <button class="btn btn-primary" name="add_course" value="selected">Register New Courses</button>
-            <button class="btn btn-primary" name="add_assignment" value="selected">View Registered Courses</button>
+            <button class="" name="add_course" value="selected">Register New Courses</button>
+            <button class="" name="add_assignment" value="selected">View Registered Courses</button>
         </div>
     </form>
-{% endif %}
+    {% endif %}
 
 </div>
 
 
 <div id="right_div">
- <script>
-        document.getElementsByTagName("button").onclick = function() {
-   alert("button was clicked");
-}
-    </script>
-{% if msg == "home_staff" %}
+
+    {% if msg == "home_staff" %}
     <div id="mainPage" style="align-items: flex-start">
         <h1> <b>Welcome {{name}} !</b></h1>
     </div>
-{% endif %}
+    {% endif %}
+    {% if msg == "courses_section" %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Course Name</th>
+                <th scope="col">Department</th>
+                <th scope="col">Cridit Hours</th>
+                <th scope="col">Midterm</th>
+                <th scope="col">Activities</th>
+                <th scope="col">Final</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for course in courses %}
+            <tr>
+                <td scope="row">{{ course["name"] }}</td>
+                <td>{{ course["department"] }}</td>
+                <td>{{ course["ch"] }}</td>
+                <td>{{ course["midterm"] }}</td>
+                <td>{{ course["activities"] }}</td>
+                <td>{{ course["final"] }}</td>
+                <td>
+                    <button class="tbutton" name="course" value="btn-{{course['name']}}" type="submit">ADD</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-{% if msg == "courses_section" %}
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">Course Name</th>
-      <th scope="col">Department</th>
-      <th scope="col">Cridit Hours</th>
-      <th scope="col">Midterm</th>
-      <th scope="col">Activities</th>
-      <th scope="col">Final</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for course in courses %}
-        <tr>
-            <td scope="row">{{ course["name"] }}</td>
-            <td>{{ course["department"] }}</td>
-            <td>{{ course["ch"] }}</td>
-            <td>{{ course["midterm"] }}</td>
-            <td>{{ course["activities"] }}</td>
-            <td>{{ course["final"] }}</td>
-            <td>
-            <button class="btn btn-primary" type="submit">ADD</button>
-    </td>
-        </tr>
-    {% endfor %}
-  </tbody>
-</table>
-
-{% endif %}
+    {% endif %}
+    <script>
+        var buttons = document.querySelectorAll("button");
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].onclick = function () {
+                console.log(buttons[i])
+            }
+        }
+        console.log(buttons)
+    </script>
 
 </div>
 

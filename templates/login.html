@@ -1,17 +1,18 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Login
+Login
 {% endblock %}
 
 {% block style %}
- <style>
+<style>
 
- </style>
+</style>
 {% endblock %}
 
 {% block main %}
-<form action="/login" method="post">
+<div class="container log">
+    <form action="/login" method="post">
         <div class="form-group">
             <label for="username">Username:</label>
             <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
@@ -28,6 +29,7 @@
                 <option value="staff">Staff Member</option>
             </select>
         </div>
-        <button class="btn btn-primary" type="submit">Log In</button>
+        <button class="" type="submit">Log In</button>
     </form>
+</div>
 {% endblock %}
