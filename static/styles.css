@@ -203,4 +203,54 @@ h1.apology {
   color: var(--text-on-fg);
   text-align: center;
 }
+
+h1 {
+  margin: 15px;
+  text-transform: capitalize;
+}
+
+div.container {
+  min-height: -webkit-min-content;
+  min-height: -moz-min-content;
+  min-height: min-content;
+}
+
+div.container th,
+div.container td {
+  border: 1px solid var(--text-on-bg);
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  vertical-align: middle;
+}
+
+div.dashboard {
+  background: var(--foreground-color);
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 15px;
+}
+
+div.marks {
+  margin: 25px;
+}
+
+.subtitle {
+  text-transform: capitalize;
+  margin: 15px 0;
+}
+
+.course-name {
+  background: var(--foreground-color);
+  padding: 10px;
+  border-radius: 10px;
+  color: var(--text-on-fg);
+  margin: 10px;
+  font-size: 1.2em;
+  text-transform: capitalize;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
 /*# sourceMappingURL=styles.css.map */
